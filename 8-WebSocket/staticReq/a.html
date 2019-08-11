@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Demo</title>
+    <script src="//cdn.bootcss.com/socket.io/1.7.2/socket.io.min.js"></script>
+</head>
+<body>
+<h1>WebSocket Demo</h1>
+<p>hello world</p>
+<button onclick="crossDomain()">跨域</button>
+
+<script>
+    var p = document.getElementsByTagName('p')[0];
+    var io = io.connect('http://127.0.0.1:3001');
+    io.on('data', function (data) {
+        alert('2s后改变数据👻');
+        p.innerHTML = data
+    });
+    io.on('data22', function (data) {
+        p.innerHTML = data
+    });
+    console.log(io)
+    // 响应onmessage事件:
+// io.onmessage = function(msg) { console.log(msg); };
+    function crossDomain (){
+        // io.send('ddd')
+        // io.emit('home')
+    console.log(io)
+     
+        console.log('点击了跨域');
+        io.emit('home', 'tobi', (data) => {
+          console.log('crossDomain'); // receive data
+        });
+    }
+</script>
+</body>
+</html>
